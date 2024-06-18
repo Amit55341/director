@@ -1,0 +1,49 @@
+/* Apply styling to metric containers */
+[data-testid=metric-container] {
+    box-shadow: 1 1 8px rgba(0, 0, 0, 1);
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    background-color: #f0caca;
+}
+
+/* Apply styling to plot containers */
+.plot-container>div {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 1);
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    background-color: #f0caca;
+}
+
+/* Style expander elements */
+div[data-testid="stExpander"] div[role="button"] p {
+    font-size: 1.3rem;
+    color: #ededed; /* Adjust the color based on your preference */
+}
+
+/* Style the expander content */
+div[data-testid="stExpander"] div[role="region"] {
+    background-color: #777575; /* Adjust the background color based on your preference */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 1);
+    margin-top: 10px;
+}
+
+/* Style the expander title */
+div[data-testid="stExpander"] div[role="button"] span {
+    color: #495057; /* Adjust the color based on your preference */
+}
+
+/* Additional styles for better aesthetics */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4; /* Adjust the background color based on your preference */
+    color: #333; /* Adjust the text color based on your preference */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #343a40; /* Adjust heading text color based on your preference */
+}
+
