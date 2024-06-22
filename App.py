@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 from streamlit_option_menu import option_menu
 from src.streamlit_extras.metric_cards import style_metric_cards
 
+
 class DashboardApp:
     _option_menu_counter = 0
     def __init__(self):
@@ -112,6 +113,16 @@ class DashboardApp:
             else:
                 st.sidebar.markdown(f'<center><p><h2 style="color: black; font-family: Helvetica, sans-serif;">Honorable Director <br>  {self.name}</h2></p></center>',unsafe_allow_html=True)
     
+    @st.cache
+    def load_data(self):
+        
+        df_filtered = pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
+        df= df_filtered[df_filtered['CadId'] == self.cad_id]
+        return df
+    
+
+    
+    
     def main(self):
         if 'loggedIn' not in st.session_state:
             st.session_state['loggedIn'] = False
@@ -121,8 +132,9 @@ class DashboardApp:
             self.mainMenu()
             
             #filtered_df = pd.read_excel('data\invoicedata.xlsx')
-            filtered_df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
-            df = filtered_df[filtered_df['CadId'] == 2]
+            #filtered_df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
+            #df =  filtered_df[filtered_df['CadId'] == self.cad_id]
+            df=self.load_data()
 
             options = ['Monthly', 'Yearly']
             report_type = st.sidebar.radio("Select Report Type", options)
@@ -506,6 +518,13 @@ class DashboardApp:
         else:
             self.login()
 
+    @st.cache
+    def load_data_out(self):
+        
+        df = pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/outstanding.xlsx')
+        df_out= df[df['CadId'] == self.cad_id]
+        return df_out
+    
     def outstanding(self):
         if 'loggedIn' not in st.session_state:
             st.session_state['loggedIn']=False
@@ -513,11 +532,10 @@ class DashboardApp:
         if st.session_state['loggedIn'] == True:
             #conn = self.create_connection()
             self.mainMenu()
-            cadid=self.cad_id
-            #df=pd.read_excel('data\outstanding.xlsx')
-            df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/outstanding.xlsx')
-            df_out = df[df['CadId'] == 2]
-            #df_out = self.load_data(conn,cadid,query)
+            #cadid=self.cad_id
+            #df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/outstanding.xlsx')
+            #df_out = df[df['CadId'] == cadid]
+            df_out = self.load_data_out()
             brLocName = st.sidebar.multiselect("Select Branch",options=df_out['BrLocName'].unique(),default=df_out['BrLocName'].unique())
             filtered_df = df_out[df_out['BrLocName'].isin(brLocName)]
             # Key Metrics Section
