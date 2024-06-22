@@ -113,12 +113,12 @@ class DashboardApp:
             else:
                 st.sidebar.markdown(f'<center><p><h2 style="color: black; font-family: Helvetica, sans-serif;">Honorable Director <br>  {self.name}</h2></p></center>',unsafe_allow_html=True)
     
-    @st.cache
-    def load_data(self):
+    #@st.cache
+    #def load_data(self):
         
-        df_filtered = pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
-        df= df_filtered[df_filtered['CadId'] == self.cad_id]
-        return df
+        #df_filtered = pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
+        #df= df_filtered[df_filtered['CadId'] == self.cad_id]
+        #return df
     
 
     
@@ -132,9 +132,9 @@ class DashboardApp:
             self.mainMenu()
             
             #filtered_df = pd.read_excel('data\invoicedata.xlsx')
-            #filtered_df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
-            #df =  filtered_df[filtered_df['CadId'] == self.cad_id]
-            df=self.load_data()
+            filtered_df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
+            df =  filtered_df[filtered_df['CadId'] == self.cad_id]
+            #df=self.load_data()
 
             options = ['Monthly', 'Yearly']
             report_type = st.sidebar.radio("Select Report Type", options)
