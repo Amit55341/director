@@ -113,12 +113,12 @@ class DashboardApp:
             else:
                 st.sidebar.markdown(f'<center><p><h2 style="color: black; font-family: Helvetica, sans-serif;">Honorable Director <br>  {self.name}</h2></p></center>',unsafe_allow_html=True)
     
-    @st.cache
-    def load_data(self):
+    #@st.cache
+    #def load_data(self):
         
-        df_filtered = pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
-        df= df_filtered[df_filtered['CadId'] == self.cad_id]
-        return df
+        #df_filtered = pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
+        #df= df_filtered[df_filtered['CadId'] == self.cad_id]
+        #return df
     
 
     
@@ -131,10 +131,10 @@ class DashboardApp:
             #conn = self.create_connection()
             self.mainMenu()
             
-            #filtered_df = pd.read_excel('data\invoicedata.xlsx')
-            #filtered_df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
-            #df =  filtered_df[filtered_df['CadId'] == self.cad_id]
-            df=self.load_data()
+            filtered_df = pd.read_excel('data\invoicedata.xlsx')
+            filtered_df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
+            df =  filtered_df[filtered_df['CadId'] == self.cad_id]
+            #df=self.load_data()
 
             options = ['Monthly', 'Yearly']
             report_type = st.sidebar.radio("Select Report Type", options)
@@ -535,7 +535,7 @@ class DashboardApp:
             cadid=self.cad_id
             df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/outstanding.xlsx')
             df_out = df[df['CadId'] == cadid]
-            df_out = self.load_data_out()
+            #df_out = self.load_data_out()
             brLocName = st.sidebar.multiselect("Select Branch",options=df_out['BrLocName'].unique(),default=df_out['BrLocName'].unique())
             filtered_df = df_out[df_out['BrLocName'].isin(brLocName)]
             # Key Metrics Section
