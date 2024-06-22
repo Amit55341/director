@@ -131,7 +131,7 @@ class DashboardApp:
             #conn = self.create_connection()
             self.mainMenu()
             
-            filtered_df = pd.read_excel('data\invoicedata.xlsx')
+            #filtered_df = pd.read_excel('data\invoicedata.xlsx')
             filtered_df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
             df =  filtered_df[filtered_df['CadId'] == self.cad_id]
             #df=self.load_data()
