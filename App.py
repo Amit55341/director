@@ -518,12 +518,12 @@ class DashboardApp:
         else:
             self.login()
 
-    @st.cache
-    def load_data_out(self):
+    #@st.cache
+    #def load_data_out(self):
         
-        df = pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/outstanding.xlsx')
-        df_out= df[df['CadId'] == self.cad_id]
-        return df_out
+        #df = pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/outstanding.xlsx')
+        #df_out= df[df['CadId'] == self.cad_id]
+        #return df_out
     
     def outstanding(self):
         if 'loggedIn' not in st.session_state:
@@ -532,9 +532,9 @@ class DashboardApp:
         if st.session_state['loggedIn'] == True:
             #conn = self.create_connection()
             self.mainMenu()
-            #cadid=self.cad_id
-            #df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/outstanding.xlsx')
-            #df_out = df[df['CadId'] == cadid]
+            cadid=self.cad_id
+            df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/outstanding.xlsx')
+            df_out = df[df['CadId'] == cadid]
             df_out = self.load_data_out()
             brLocName = st.sidebar.multiselect("Select Branch",options=df_out['BrLocName'].unique(),default=df_out['BrLocName'].unique())
             filtered_df = df_out[df_out['BrLocName'].isin(brLocName)]
