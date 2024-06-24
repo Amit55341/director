@@ -119,6 +119,14 @@ class DashboardApp:
         #df_filtered = pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
         #df= df_filtered[df_filtered['CadId'] == self.cad_id]
         #return df
+
+
+    @staticmethod
+    @st.cache_data
+    def load_data(cad_id):
+        df_filtered = pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
+        df = df_filtered[df_filtered['CadId'] == cad_id]
+        return df
     
 
     
@@ -131,10 +139,10 @@ class DashboardApp:
             #conn = self.create_connection()
             self.mainMenu()
             
-            #filtered_df = pd.read_excel('data\invoicedata.xlsx')
-            filtered_df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
-            df =  filtered_df[filtered_df['CadId'] == self.cad_id]
-            #df=self.load_data()
+          
+            #filtered_df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/invoicedata.xlsx')
+            #df =  filtered_df[filtered_df['CadId'] == self.cad_id]
+            df=self.load_data(self.cad_id)
 
             options = ['Monthly', 'Yearly']
             report_type = st.sidebar.radio("Select Report Type", options)
@@ -524,6 +532,14 @@ class DashboardApp:
         #df = pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/outstanding.xlsx')
         #df_out= df[df['CadId'] == self.cad_id]
         #return df_out
+
+
+    @staticmethod
+    @st.cache_data
+    def load_data_out(cad_id):
+        df = pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/outstanding.xlsx')
+        df_out = df[df['CadId'] == cad_id]
+        return df_out
     
     def outstanding(self):
         if 'loggedIn' not in st.session_state:
@@ -533,9 +549,9 @@ class DashboardApp:
             #conn = self.create_connection()
             self.mainMenu()
             cadid=self.cad_id
-            df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/outstanding.xlsx')
-            df_out = df[df['CadId'] == cadid]
-            #df_out = self.load_data_out()
+            #df=pd.read_excel('http://203.187.225.154/BISMARVELNEWTEST/outstanding.xlsx')
+            #df_out = df[df['CadId'] == cadid]
+            df_out = self.load_data_out(cadid)
             brLocName = st.sidebar.multiselect("Select Branch",options=df_out['BrLocName'].unique(),default=df_out['BrLocName'].unique())
             filtered_df = df_out[df_out['BrLocName'].isin(brLocName)]
             # Key Metrics Section
